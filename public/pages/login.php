@@ -49,7 +49,7 @@
 <div class="container-login">
     <form action="asd.com" method="POST" class="login-form">
     <h1 class="container-login_title">Login</h1>
-            <label for="Login" class="login-form_label">Login</label>
+            <label for="Login" class="login-form_label">Login2</label>
             <input type="text" class="login-form_input" name="username" requerid>
 
             <label for="" class="password-form_label">Password</label>
