@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    background-color: rgb(25, 25, 77);
+}
+
+.container-register{
+    display: flex;
+    width: 40rem;
+    height: 30rem;
+    margin: 0 auto;
+    background-color: rgb(50, 36, 177);
+    flex-direction: column;
+    justify-content: center;
+    border-radius: .4rem;
+}
+
+.form-register{
+    display: grid;
+    place-items: center;
+}
+
+.form-register_title{
+    margin-bottom: 2rem;
+}
+
+label{
+    font-size:1.1rem;
+    color: white;
+}
