@@ -5,30 +5,39 @@
     if($conn->connect_error) {
         die("Falha na conexão: " . $conn->connect_error);
     }
-    
-    
     $msg = "";
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login_button"])){
        $username = $_POST["username"];
        $password = $_POST["password"];
 
-       $query = $conn->prepare("SELECT * FROM users WHERE name = ? AND password = ?" );
-       $query->bind_param("ss", $username, $password);
+       $query = $conn->prepare("SELECT * FROM users WHERE name = ?");
+       $query->bind_param("s", $username);
        $query->execute();
        
 
        $result = $query->get_result();
+
+
+       if($result->num_rows > 0){
+
+        $row = $result->fetch_assoc();
+        $hashed_password = $row['password'];
+
+        if(password_verify($password, $hashed_password)){
+
+            $msg =  'Login feito com sucesso';
+            header("Location: bank.php");
+        }
+        else{
+         $msg = "Login mal sucessido!";
+        }
+       }
+
        $query->close();
        $conn->close();
 
   
 
-       if($result->num_rows == 1){
-        $msg = "Login feito com sucesso!";
-       }
-       else{
-        $msg = "Login mal sucessido!"
-       }
 
     }
 
@@ -47,9 +56,9 @@
 <h1 class="title">Welcome the bank</h1>  
 
 <div class="container-login">
-    <form action="asd.com" method="POST" class="login-form">
+    <form action="" method="POST" class="login-form">
     <h1 class="container-login_title">Login</h1>
-            <label for="Login" class="login-form_label">Login2</label>
+            <label for="Login" class="login-form_label">Login</label>
             <input type="text" class="login-form_input" name="username" requerid>
 
             <label for="" class="password-form_label">Password</label>

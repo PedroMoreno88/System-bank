@@ -4,7 +4,7 @@ body{
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    background-color: rgb(25, 25, 77);
+    background-color: rgb(12, 12, 54);
     color: white;
 }
 
@@ -22,7 +22,7 @@ body{
     width: 40rem;
     height: 30rem;
     margin: 0 auto;
-    background-color: rgb(50, 36, 177);
+    background-color: rgb(93, 79, 223);
     flex-direction: column;
     justify-content: center;
     border-radius: .4rem;
