@@ -1,5 +1,4 @@
 <?php
-
 function showCard($nameCard,$clientName,$valid,$number){
     echo '    <div class="card-container">
         <h1 class="name-card">'. $nameCard . '</h1>
@@ -8,12 +7,7 @@ function showCard($nameCard,$clientName,$valid,$number){
         <p class="number-card">'. $number . '</p>
     </div>';
 }
-
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

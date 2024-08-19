@@ -1,6 +1,5 @@
 <?php
 
-
     function createAhref($text, $route){
         echo '<a href="' . $route . '" class=' . $text . '-ahref>' . $text . '</a>';
     }

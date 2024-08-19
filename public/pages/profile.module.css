@@ -1,0 +1,37 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.container-profile{
+    background-color: rebeccapurple;
+    width: 70rem;
+    height: 30rem;
+    text-align: center;
+    place-content: center;
+}
+
+.name_title{
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 10rem;
+}
+
+input{
+    margin-bottom: 8rem;
+    width: 10rem;
+    height: 5rem;
+    border-radius: .3rem;
+    border: 0px;
+    background-color: rgb(71, 216, 71);
+    font-size: 1.2rem;
+    letter-spacing: .2rem;
+    cursor: pointer;
+}
+
+p{
+    color: white;
+    font-size: 1.5rem;
+}

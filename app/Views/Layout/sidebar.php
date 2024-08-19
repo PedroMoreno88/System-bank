@@ -1,5 +1,8 @@
 <?php
 include 'ahref.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,17 +36,29 @@ function closeSidebar(){
         <button type="submit" onclick="closeSidebar()" id="button-close-sidebar">╳</button>
 
         <div class="profile-sidebar">
-            <h1>Pedro</h1>
-            <a href="" class="ahref-sidebar"><img src="../../public/assents/" alt="" class="sidebar_img"></a>
+            <h1>
+                <?php
+
+                echo $_SESSION['username'];
+
+                ?>
+            </h1>
+            <a href="" class="ahref-sidebar"><img src="../../public/assents/perfil.jpeg" alt="" class="sidebar_img"></a>
+            <p class="balance">    
+                <?php
+
+                echo 'Saldo:' . $_SESSION['user_balance'];
+
+                ?>
+            </p>
         </div>
 
         <div class="options-sidebar">
 
         <?php
             createAhref("Home", "home");
-            createAhref("Transition", "transition");
             createAhref("Historic", "historic");
-            createAhref("Info", "info");
+            createAhref("Info", "profile.php");
             createAhref("Logout", "/System-Bank/public/pages/login.php");
         ?>
 

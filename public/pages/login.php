@@ -1,6 +1,8 @@
 
 <?php
-    include "../../Config/database.php";
+
+session_start();
+include "../../Config/database.php";
 
     if($conn->connect_error) {
         die("Falha na conexão: " . $conn->connect_error);
@@ -19,24 +21,40 @@
 
 
        if($result->num_rows > 0){
+           $row = $result->fetch_assoc();
+           $hashed_password = $row['password'];
 
-        $row = $result->fetch_assoc();
-        $hashed_password = $row['password'];
+           
 
         if(password_verify($password, $hashed_password)){
 
-            $msg =  'Login feito com sucesso';
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['name'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['user_balance'] = $row['saldo'];
+
+
+
+            $msg = 'Login feito com sucesso';
+            $_SESSION['autenticado'] = "sim";
             header("Location: bank.php");
+            exit();
         }
         else{
-         $msg = "Login mal sucessido!";
+         $msg = "Login mal sucessido!" ;
+         $_SESSION['autenticado'] = "nao";
+         header("Location: login.php?error=login2");
         }
+       }
+       else{
+        $msg = "Login mal sucessido!" ;
+        $_SESSION['autenticado'] = "nao";
+        header("Location: login.php?error=login2");
+
        }
 
        $query->close();
        $conn->close();
-
-  
 
 
     }
