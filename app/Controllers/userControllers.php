@@ -1,5 +1,9 @@
 <?php
+       if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        include 'aut.php';
 
+    }
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +14,6 @@
     <title>Document</title>
 </head>
 <body>
-    <p>DASD</p>
+    
 </body>
 </html>

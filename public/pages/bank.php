@@ -1,25 +1,42 @@
 <?php
+    
+    session_start();
+    if (!isset($_SESSION['autenticado']) && $_SESSION['autenticado'] === "sim") 
+    {
+        echo "Sessão não autenticada";
+        header("Location: login.php?error=login2");
+    } 
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include "../../Config/database.php";
 include '../../app/Views/Layout/cards.php';
-$userName = "Maria";
+include '../../app/Views/Layout/sidebar.php';
+include_once '../../app/User/InfoUser.php';
+
+
+$username = ($_SESSION['username']);
 
 if($conn->connect_error){
     die("Falha ao conectar com o banco: " . $conn->connect_error);
 }
 
-// Inicializar variáveis com valores padrão
-$cardNumber = "No card found";
+
+$cardNumber = "";
 $cardValid = "N/A";
 $cardName = "No name";
 $nameClient = "No client";
 
-// Preparar e executar a consulta SQL
-$query = $conn->prepare("SELECT cardNumber, CardValid, CardName, nameClient FROM card WHERE nameClient = ?");
-$query->bind_param("s", $userName);
+
+$query = $conn->prepare("SELECT `cardNumber`, `cardValid`, `cardName`, `nameClient`, `userId` FROM `card` WHERE userId = ?");
+$query->bind_param("s", $username);
 $query->execute();
 $result = $query->get_result();
 
-// Verificar se houve resultados
+
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $cardNumber = $row['cardNumber'];
@@ -27,18 +44,13 @@ if ($result->num_rows > 0) {
         $cardName = $row['CardName'];
         $nameClient = $row['nameClient'];
 
-        // Chamar a função showCard para cada linha de resultado
+        
     }
-} else {
-    echo "Nenhum cartão encontrado para o cliente $userName";
 }
 
-// Fechar a conexão
+
+
 $conn->close();
-
-// Inclua as views depois que as variáveis estiverem definidas e a função showCard for chamada
-include '../../app/Views/Layout/sidebar.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -55,10 +67,7 @@ include '../../app/Views/Layout/sidebar.php';
 
     <div class="cards">
         <?php
-
 showCard($cardName, $nameClient, $cardValid, $cardNumber);
-
-
         ?>
     </div>
 

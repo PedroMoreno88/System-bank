@@ -1,5 +1,6 @@
 <?php
     include "../../Config/database.php";
+    
 
     if($conn->connect_error){
         die("Falha na conexao:" . $conn->connect_error);
